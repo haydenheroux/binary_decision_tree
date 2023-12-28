@@ -1,13 +1,13 @@
-from typing import ForwardRef, List, Union
+from typing import ForwardRef, List, Optional, Union
 
 QuestionNodeType = ForwardRef("QuestionNode")
 AnswerNodeType = ForwardRef("AnswerNode")
 
 class QuestionNode():
-    def __init__(self, left: Union[QuestionNodeType, AnswerNodeType, None]=None, right: Union[QuestionNodeType, AnswerNodeType, None]=None, question=""):
+    def __init__(self, question, left: Optional[Union[QuestionNodeType, AnswerNodeType]]=None, right: Optional[Union[QuestionNodeType, AnswerNodeType]]=None):
+        self.question = question
         self.false = left
         self.true = right
-        self.question = question
 
     def traverse(self) -> AnswerNodeType:
         selected = self.test()
