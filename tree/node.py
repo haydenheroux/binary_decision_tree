@@ -9,16 +9,16 @@ class QuestionNode():
         self.false = left
         self.true = right
 
-    def traverse(self) -> AnswerNodeType:
-        selected = self.test()
+    def interactive_search(self) -> AnswerNodeType:
+        questionOrAnswer: Union[QuestionNodeType, AnswerNodeType] = self.ask()
 
-        if isinstance(selected, AnswerNode):
-            return selected
+        if isinstance(questionOrAnswer, AnswerNode):
+            return questionOrAnswer
 
-        return selected.traverse()
+        return questionOrAnswer.interactive_search()
         
 
-    def test(self) -> Union[QuestionNodeType, AnswerNodeType]:
+    def ask(self) -> Union[QuestionNodeType, AnswerNodeType]:
         response = input(f"{self.question}? ")
         if response in ["y", "yes"]:
             return self.true
@@ -26,7 +26,7 @@ class QuestionNode():
             return self.false
         else:
             # Retry
-            return self.test()
+            return self.ask()
 
 class AnswerNode():
     def __init__(self, value: List[str]):

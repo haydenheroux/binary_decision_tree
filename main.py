@@ -8,4 +8,5 @@ if __name__ == "__main__":
     melee.false = AnswerNode(value=["Quinn"])
     root.true = melee
 
-    print(root.traverse())
+    result = root.interactive_search()
+    print(result)
